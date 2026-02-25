@@ -1,0 +1,10 @@
+services:
+  postgres:
+    container_name: 'main-db'
+    image: 'postgres:latest'
+    environment:
+      - 'POSTGRES_DB=festivaldb'
+      - 'POSTGRES_PASSWORD=admin'
+      - 'POSTGRES_USER=admin'
+    ports:
+      - '5432:5432'
