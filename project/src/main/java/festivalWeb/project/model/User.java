@@ -2,6 +2,7 @@ package festivalWeb.project.model;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.Fetch;
 import org.jspecify.annotations.Nullable;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -55,6 +56,9 @@ public class User implements UserDetails {
     @Enumerated(EnumType.STRING)
     @Column(name = "roles")
     private Set<Role> roles = new HashSet<>();
+
+    @ManyToMany(mappedBy = "players")
+    private Set<Game> games = new HashSet<>();
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

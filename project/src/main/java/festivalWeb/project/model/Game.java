@@ -1,17 +1,17 @@
 package festivalWeb.project.model;
 
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.RequiredArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 import java.time.LocalDateTime;
 import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
 @Data
 @Entity
-@RequiredArgsConstructor
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "games")
 public class Game {
     @Id
@@ -41,13 +41,14 @@ public class Game {
     @Column(name = "dateTime")
     private LocalDateTime dateTime;
 
-//    @ManyToMany(fetch = FetchType.LAZY)
-//    @JoinTable(
-//            name = "game_player",
-//            joinColumns = @JoinColumn(name = "game_id"),
-//            inverseJoinColumns = @JoinColumn(name = "player_id")
-//    )
-//    @ToString.Exclude
-//    Set<User> players = new HashSet<>();
+    @ManyToMany(fetch = FetchType.LAZY)
+    @Column(name = "players")
+    @JoinTable(
+            name = "game_user",
+            joinColumns = @JoinColumn(name = "game_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id")
+    )
+    @ToString.Exclude
+    Set<User> players = new HashSet<>();
 
 }
